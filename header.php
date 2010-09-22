@@ -8,7 +8,8 @@
  * @subpackage Twenty_Ten
  * @since Twenty Ten 1.0
  */
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html <?php language_attributes(); ?>>
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
@@ -35,7 +36,12 @@
 	?></title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
+<link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory'); ?>/media/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory'); ?>/media/css/grid.css" />
+<link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory'); ?>/media/css/base.css" />
+<!--[if lt IE 9]<link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory'); ?>/media/css/ie.css" /><![endif]-->
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <?php
 	/* We add some JavaScript to pages with the comment form
 	 * to support sites with threaded comments (when in use).
