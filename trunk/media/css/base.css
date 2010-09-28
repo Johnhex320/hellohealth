@@ -257,6 +257,9 @@ h1, a, .comments span,
 #contact  #cover {
 	background-image: url(../images/1688x240_Leo.jpg);
 }
+#meaningful  #cover {
+	background-image: url(../images/1688x240_Caro.jpg);
+}
 #cover .shadow {
 	position: absolute;
 	z-index: 10;
@@ -298,7 +301,6 @@ h1, a, .comments span,
 }
 #banner .intro {
 	width: 81%;
-	margin-bottom: 35px;
 }
 .box-video {
 	background-color: #6d6d6d;

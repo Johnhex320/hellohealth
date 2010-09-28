@@ -481,3 +481,21 @@ function twentyten_posted_in() {
 	);
 }
 endif;
+
+/**
+* Custom functions
+* Developer: Son Pham
+*/
+function dynamicBodyID() {
+	if (is_home()) {
+		echo ' id="home"';
+	} elseif (is_single()) {
+		echo ' id="single"';
+	} elseif (is_search()) {
+		echo ' id="search"';
+	} elseif (is_archive()) {
+		echo ' id="archive"';
+	} else {
+		echo ' id="default"';
+	}
+}

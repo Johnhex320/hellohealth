@@ -9,8 +9,8 @@
 
 get_header(); ?>
 
-		<div id="container">
-			<div id="content" role="main">
+		<div id="wrapper">
+			<!--<div id="content" role="main">-->
 
 <?php if ( have_posts() ) : ?>
 				<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'twentyten' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
@@ -30,7 +30,7 @@ get_header(); ?>
 					</div><!-- .entry-content -->
 				</div><!-- #post-0 -->
 <?php endif; ?>
-			</div><!-- #content -->
+			<!--</div>--><!-- #content -->
 		</div><!-- #container -->
 
 <?php get_sidebar(); ?>

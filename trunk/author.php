@@ -9,8 +9,8 @@
 
 get_header(); ?>
 
-		<div id="container">
-			<div id="content" role="main">
+		<div id="wrapper">
+			<!--<div id="content" role="main">-->
 
 <?php
 	/* Queue the first post, that way we know who
@@ -53,7 +53,7 @@ if ( get_the_author_meta( 'description' ) ) : ?>
 	 */
 	 get_template_part( 'loop', 'author' );
 ?>
-			</div><!-- #content -->
+			<!--</div>--><!-- #content -->
 		</div><!-- #container -->
 
 <?php get_sidebar(); ?>

@@ -32,7 +32,7 @@ get_header(); ?>
 
 <?php endwhile; ?>
 
-			</div><!-- #content -->
+			<!--</div>--><!-- #content -->
 		</div><!-- #container -->
 
 <?php get_footer(); ?>
