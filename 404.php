@@ -9,8 +9,8 @@
 
 get_header(); ?>
 
-	<div id="container">
-		<div id="content" role="main">
+	<div id="wrapper">
+		<!--<div id="content" role="main">-->
 
 			<div id="post-0" class="post error404 not-found">
 				<h1 class="entry-title"><?php _e( 'Not Found', 'twentyten' ); ?></h1>
@@ -20,7 +20,7 @@ get_header(); ?>
 				</div><!-- .entry-content -->
 			</div><!-- #post-0 -->
 
-		</div><!-- #content -->
+		<!--</div>--><!-- #content -->
 	</div><!-- #container -->
 	<script type="text/javascript">
 		// focus on search field after it has loaded
