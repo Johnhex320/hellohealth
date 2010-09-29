@@ -486,16 +486,57 @@ endif;
 * Custom functions
 * Developer: Son Pham
 */
-function dynamicBodyID() {
-	if (is_home()) {
-		echo ' id="home"';
-	} elseif (is_single()) {
-		echo ' id="single"';
-	} elseif (is_search()) {
-		echo ' id="search"';
-	} elseif (is_archive()) {
-		echo ' id="archive"';
-	} else {
-		echo ' id="default"';
-	}
+function hh_body_ID() {
+	global $post;
+	$bodyId = get_post_meta($post->ID, "helloHealth_bodyId", true);
+	
+	if ($bodyId != ""):
+		echo ' id="'. $bodyId .'"';
+	else:
+		if (is_home()) {
+			echo ' id="home"';
+		} elseif (is_404()) {
+			echo ' id="404"';
+		} elseif (is_single()) {
+			echo ' id="single"';
+		} elseif (is_search()) {
+			echo ' id="search"';
+		} elseif (is_archive()) {
+			echo ' id="archive"';
+		} else {
+			echo ' id="default"';
+		}
+	endif;
+}
+function hh_page_menu($pageType, $pagePosition, $id, $cssClass, $includeHome) {
+	$pages = get_pages("parent=0&sort_column=menu_order");
+	$countPages = count($pages);
+	if ($countPages > 0):
+		$counter = 0;
+		$class = "first";
+	
+		echo '<ul id="'.$id.'" class="'.$cssClass.'">';	
+		foreach ($pages as $page) {
+			$pgType = get_post_meta($page->ID, "helloHealth_pageTypeId", true);
+			$pgPosition = get_post_meta($page->ID, "helloHealth_pagePositionId", true);
+			
+			if ($counter != 0) : 
+				$class = "";
+			endif;
+			
+			if (($pgType == $pageType) && ($pgPosition == $pagePosition)) :
+				$option = '<li class="'.$class.'"><a href="'.get_page_link($page->ID).'" rel="section" title="'.$page->post_title.'">';
+				$option .= $page->post_title;
+				$option .= '</a></li>';
+				echo $option;
+				$counter++;
+			endif;
+		}
+		echo '</ul>';
+		?>
+        <script>
+			$("#<?php echo $id ?> li:last").addClass("last");
+		</script>
+        <?php
+	endif;
 }

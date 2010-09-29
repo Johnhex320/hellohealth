@@ -35,10 +35,9 @@
 
 	?></title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
-<!--<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />-->
 <link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory'); ?>/media/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory'); ?>/media/css/grid.css" />
-<link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory'); ?>/media/css/base.css" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 <!--[if lt IE 9]<link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory'); ?>/media/css/ie.css" /><![endif]-->
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
@@ -58,7 +57,7 @@
 ?>
 </head>
 
-<body <?php echo dynamicBodyID(); ?> <?php body_class(); ?>>
+<body <?php echo hh_body_ID(); ?> <?php body_class(); ?>>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/media/js/init.js"></script>
 <!--
 <div id="wrapper" class="hfeed">
@@ -107,15 +106,18 @@
 <div id="header">
     <div id="header-wrapper" class="container_6">
         <div class="grid_6">
-            <img id="logo" src="media/images/logo-hello-health.png" alt="Hello Health logo" />
-            <ul id="navigation-primary" class="menu">
-            	<li class="first"><a href="index.html" rel="index" title="">Home</a><span></span></li>
+            <?php hh_page_menu('physicians', 'header', 'navigation-primary', 'menu', 1); ?>
+            <img id="logo" src="<?php bloginfo('template_directory'); ?>/media/images/logo-hello-health.png" alt="Hello Health logo" />
+            <!--<ul id="navigation-primary" class="menu">-->
+                <!--
+                <li class="first"><a href="index.html" rel="index" title="">Home</a><span></span></li>
                 <li><a href="why.html" rel="section" title="">Why Hello Health</a></li>
                 <li><a href="how.html" rel="section" title="">How Physicians use Hello Health?</a></li>
                 <li><a href="technology.html" rel="section" title="">Technology</a></li>
                 <li><a href="started.html" rel="section" title="">Get Started</a></li>
                 <li class="last"><a href="university.html" rel="section" title="">Hello Health University</a></li>
-            </ul>
+            	-->
+            <!--</ul>-->
 		</div>
         <div class="clear"></div>
     </div>
@@ -123,6 +125,8 @@
 
 <?php get_template_part('blocks/banner'); ?>
 
-<div class="shadow"></div>
+<div class="clear"></div>
+
+<div id="content-shadow" class="shadow"></div>
 <div id="content">
     <div class="container_6">
