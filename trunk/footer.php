@@ -63,6 +63,8 @@
                 <li><a href="#" rel="external" class="twitter">Twitter</a></li>
             </ul>
             <div class="clear"></div>
+            <?php hh_page_menu('patients_physicians', 'footer', 'navigation-secondary', '', 0); ?>
+            <!--
             <ul id="navigation-secondary">
             	<li><a href="contact.html" rel="section" title="">Contact Us</a></li>
                 <li><a href="about.html" rel="section" title="">About Hello Health</a></li>
@@ -70,6 +72,7 @@
                 <li><a href="#" rel="section" title="">Privacy</a></li>
                 <li><a href="#" rel="section" title="">Terms &amp; Conditions</a></li>
             </ul>
+            -->
         </div>
         <div class="grid_2 alpha">
         	<span>Hello Health</span>

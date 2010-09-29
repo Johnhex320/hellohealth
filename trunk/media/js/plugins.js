@@ -908,6 +908,14 @@ jQuery.lightBox = {
             return this.animateBox($lightBox, arguments);
         }
     },
+	showVideo: function(url) {
+		var html, videoId = "lightBox-video-"+$.getRandomNumber();
+		html = '<div id="'+videoId+'" class="hide">';
+		html += '<object width="640" height="385"><param name="movie" value="'+url+'?fs=1&amp;hl=en_US&amp;autoplay=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="'+url+'?fs=1&amp;hl=en_US&amp;autoplay=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>';
+		html += '</div>';
+		$("body").append(html);
+		$.lightBox.showInPage("#"+videoId);
+	},
     setCloseAction: function(lightBox) {
         var $lightBox = $(lightBox),
             config = window.lightBoxSettings[$lightBox.attr("id")];
@@ -1016,16 +1024,20 @@ jQuery.fn.lightBox = function(settings) {
             // flag to indicate that the lightBox is using the initialization method
             settings.onDemand = false;
             
-            if (settings.image) {
-                $.lightBox.showImage(this);
-            } else if (!settings.ajax) {
-                // content is in the page
-                var targetId = $element.attr("href").split("#")[1];
-                $.lightBox.showInPage("#"+targetId, $.data(this,"settings"));
-            } else {
-                // content is from url (AJAX)
-                $.lightBox.showAjax($(this), $.data(this,"settings"));
-            }
+			if ($element.attr("rel")==="video") {
+				$.lightBox.showVideo($element.attr("href"));
+			} else {
+				if (settings.image) {
+					$.lightBox.showImage(this);
+				} else if (!settings.ajax) {
+					// content is in the page
+					var targetId = $element.attr("href").split("#")[1];
+					$.lightBox.showInPage("#"+targetId, $.data(this,"settings"));
+				} else {
+					// content is from url (AJAX)
+					$.lightBox.showAjax($(this), $.data(this,"settings"));
+				}
+			}
             return false;                      
         });
     });
@@ -1090,6 +1102,37 @@ jQuery.isIE = function(version) {
         return (ieDetected && valideVersion);
     } else {
         return ieDetected;
+    }
+};
+//*****************************************************
+//  jQuery function: $.getRandomNumber()
+//
+//  developed by: Son Pham
+//
+//  description: will generate a random number (defaults 1-999)
+//
+//  scenario: You need to create unique random ID
+//
+//  Requirement: jQuery 1.3.2
+//
+//  usage:  1) $.getRandomNumber(); // 1-999
+//          2) $.getRandomNumber(5); // 1-99999
+//
+//  params:
+//  @1 numberLength (integer): number range
+//  @2 randomType (string): type of random (by "max" / length "null/undefined" (default))
+//***************************************************** 
+jQuery.getRandomNumber = function(numberLength, randomType) {
+    var strLength = "1", i;
+    if (isNaN(numberLength)) { numberLength = 3; }
+
+    if ((typeof(randomType) === "undefined") || (randomType !== "max") || (randomType === null)) {
+        for (i=0; i<numberLength; i++) {
+            strLength += i;
+        }
+        return Math.floor(Math.random()*parseInt(strLength,10));
+    } else {
+       return Math.round(Math.random()*numberLength);       
     }
 };
 })(jQuery);

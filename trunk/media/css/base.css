@@ -45,6 +45,9 @@ legend {
 #university h1{
 	margin-top: 175px;
 }
+body#splash {
+	background-color: #4a8cca;
+}
 
 h1, a, .comments span,
 .external span,
@@ -82,6 +85,50 @@ h1, a, .comments span,
 .role {
 	background-color: #0895ff;
 }
+
+#splash #header,
+#splash #footer,
+#splash #cover {
+	background-color: #4a8cca;
+}
+#splash #banner img {
+	padding-top: 35px;
+}
+
+#splash #navigation-primary {
+	visibility: hidden;
+}
+
+#splash #cover {
+	background-image: none;
+}
+#splash #cover,
+#splash .more {
+	color: #fff !important;
+}
+#splash .more:hover {
+	color: #000 !important;
+}
+#splash #header,
+#splash #cover {
+	height: auto;
+}
+#splash h1 {
+	font-size: 1.75em;
+	color: #fff;
+	margin: 50px 0 25px;
+}
+#splash .content {
+	position: absolute;
+	bottom: 0;
+}
+#splash .play {
+	background-color: transparent;
+}
+#splash .play p {
+	margin-top: 0.25em;
+}
+
 .video-action-1 {
 	background-image: url(../images/macbook.gif);
 	background-repeat: no-repeat;
@@ -639,7 +686,7 @@ dt {
 #video-listing .first {
 	margin-top: -5px;
 }
-.note {
+.note, .play {
 	padding: 11px;
 	-webkit-border-radius: 15px;
 	-moz-border-radius: 15px;
