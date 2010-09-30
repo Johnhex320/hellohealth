@@ -31,6 +31,16 @@
 			// lightbox
 			$(".lightBoxJs").lightBox();
 			
+			// ToggleShowHide
+			$(".tglJs").toggleShowHide({
+				callBack: function($link) {
+					var href = $link.attr("href");
+					if (href) {
+						$("#"+href.split("#")[1]).find("input:first").focus();	
+					}
+				}
+			});
+			
 			// Page Layout
 			$("#content .container_6").children(":first").addClass("first");
 			

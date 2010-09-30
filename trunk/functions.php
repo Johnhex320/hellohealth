@@ -540,3 +540,38 @@ function hh_page_menu($pageType, $pagePosition, $id, $cssClass, $includeHome) {
         <?php
 	endif;
 }
+function hh_get_page_children($parentPostId, $sort_column = "") {
+	// Set up the objects needed
+	$sort_column_param = "";
+	if ($sort_column != "") :
+		$sort_column_param = "&sort_column=" . $sort_column;
+	endif;
+	
+	$pages = get_pages('child_of=0&parent='.$parentPostId.'&hierarchical=0&sort_order=desc'.$sort_column_param);
+	return $pages;
+}
+
+function hh_release_latest_link($postId) {
+	$pages = hh_get_page_children($postId);
+	if (count($pages) > 0) :
+		echo get_page_link($pages[0]->ID); 
+	else:
+		echo "#";
+	endif;
+}
+
+function hh_generate_archive($parentPostId, $currentPostId) {
+	$pages = hh_get_page_children($parentPostId);
+	$currentPost = get_page($currentPostId);
+	
+	foreach ($pages as $pageId => $page) {
+		if ($page->ID != 98): // 98 = Business Card page Id
+			if ($page->ID == $currentPostId || $page->post_title == $currentPost->post_title) :
+				$class = "active";
+			else:
+				$class = "";
+			endif;
+			echo '<li><a href="'.get_page_link($page->ID).'" class="'.$class.'">'.$page->post_title.'</a></li>';
+		endif;
+	}
+}

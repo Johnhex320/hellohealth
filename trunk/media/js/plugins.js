@@ -1135,4 +1135,444 @@ jQuery.getRandomNumber = function(numberLength, randomType) {
        return Math.round(Math.random()*numberLength);       
     }
 };
+/***************************************************/
+// plugin: toggleShowHide
+//
+// Developped by: Son Pham
+//
+// description: Toggles the Show / Hide the anchor link 
+//
+//              Note: if you do not want the toggle behavior, please see toRemove() and toShow()
+// 
+// requirement: 1) jQuery 1.3.2+
+//              2) $.isIE()
+//
+// usage:   1) $(".selector").toggleShowHide()
+//
+// Note: if you want to toggle the text use the following rule:
+//       rel value must match the toggle text you want in the anchor link text
+//       <a href="#content" rel="show/hide">show/hide options</a>
+//
+// params : 
+//  @slide: (boolean) indicate if slide effect is applied  default: true
+//          note: slide is not supported on IE
+/**********************************************************/
+jQuery.fn.toggleShowHide = function(settings) {
+    var validateParams, bindClickEvent, runExternalProcess, elements = this;
+    settings = $.extend(false, $.toggleShowHide.defaults, settings);
+
+    // Validate Params
+    validateParams = function() {
+        if (typeof(settings.slide) !== "boolean") {
+            settings.slide = false;
+        }       
+    };
+
+    bindClickEvent = function() {
+        elements.live("click", function() {
+            var $element = $(this),
+                $content = [], contentId,
+                href = $element.attr("href"),
+                rev = $element.attr("rev"),
+                isInPage = true;
+            
+            if (href) {
+                if (href.substr(0,1) !== "#") { 
+                    if (rev) {
+                        isInPage = false;
+                        contentId = rev;
+                    } else if (href.indexOf("#") !== -1) {
+                        contentId = href.split("#")[1];
+                    } 
+                } else {
+                    contentId = href.split("#")[1];
+                }
+                if (contentId && contentId !== "") {
+                    $content = $("#"+contentId);
+                }
+                
+                if ($content.length) {
+                    if (!isInPage && !$.data($element.get(0),"loaded")) {
+                        $.ajaxLoader.show();
+                        $.ajax({
+                            url: href,
+                            success: function(data) {
+                                $.ajaxLoader.hide();                                    
+                                $content.html(data);
+                                // TODO: remove hardcoded value here
+                                $(".tglJs", $content).toggleShowHide();
+                                
+                                $.toggleShowHide.animateText($element, $content);
+                                $.data($element.get(0),"loaded",settings);
+                            },
+                            error: function() {
+                                $.ajaxLoader.hide();
+                                var defErrorText = "Error";
+                                if ($.isFunction($.getText)) {
+                                    $content.html($.getText("error"));
+                                } else {
+                                    $content.html(defErrorText);
+                                }
+                                $.data($element.get(0),"loaded",true);                                  
+                            }
+                        });
+                    } else {
+                        $.toggleShowHide.animateText($element, $content);
+                    }
+                    runExternalProcess($content);
+                }
+            }
+            
+            return false;
+        });
+        
+        // Third-Party optional process
+        runExternalProcess = function($content) {
+
+        };
+    };
+
+    return this.each(function(idx){
+        var $element = $(this),
+            $content, widgetClassName,
+            isInPage = true,
+            href = $element.attr("href");
+
+        // validateParams
+        if (idx ===0) { validateParams(); }
+
+        if (href) {
+            if (href.substr(0,1) !== "#") { isInPage = false; }
+
+            $content = $.toggleShowHide.getContent($element);
+
+            if ($content.length) {
+                widgetClassName = "";
+                if ($.isFunction($.getJsClassName)) {
+                    widgetClassName = $.getJsClassName($element);
+                    $element.addClass(widgetClassName);
+                    
+                    // default state opened?closed
+                    if (!$element.hasClass(widgetClassName+"Open")) {
+                        $content.hide();
+                    } else if (!isInPage) {
+                        $.ajaxLoader.show();
+                        $.ajax({
+                            url: href,
+                            success: function(data) {
+                                $.ajaxLoader.hide();                                    
+                                $content.html(data);
+                                // TODO: remove hardcoded value here
+                                $(".tglJs", $content).toggleShowHide();
+                                
+                                $.data($element.get(0),"loaded",true);
+                            },
+                            error: function() {
+                                $.ajaxLoader.hide();
+                                var defErrorText = "Error";
+                                if ($.isFunction($.getText)) {
+                                    $content.html($.getText("error"));
+                                } else {
+                                    $content.html(defErrorText);
+                                }
+                                $.data($element.get(0),"loaded",true);                                  
+                            }
+                        });
+                    } 
+                }
+                
+                settings.widgetClassName = widgetClassName;
+        
+                // Toggle text handling
+                if (!$.data($element.get(0),"settings")) {
+                    $element.attr("title", $element.text());
+                    if ($.toggleShowHide.toToggleText($element)) {
+                        $.toggleShowHide.toggleText(-1,$element);
+                        if ($element.hasClass(widgetClassName+"Open")){
+                            $.toggleShowHide.toggleText(1,$element); 
+                        }
+                    }
+                    $.data($element.get(0),"settings", settings);                   
+                }
+                
+                if (idx===0) { bindClickEvent(); }
+            }
+        }
+    });
+};
+jQuery.toggleShowHide = {
+    defaults : {
+        slide: true,
+		callBack: null
+    },
+    update: function(params) {
+        var $link, settings, $content, defaults,
+            goodIE = $.isIE(">8");
+        
+        if (typeof(params) === "object") {
+            // defaults are there for security only
+            defaults = {
+                linkElement: [],
+                ajax: false,
+                inPage: true,
+                text: false,                
+                url: "",
+                targetId: "",
+                content: ""
+            };
+            
+            params = $.extend(false,defaults,params);
+            
+            $link = $(params.linkElement);
+            
+            if ($link.length) {
+                settings = $.data($link.get(0),"settings");             
+                if (settings) {
+                    settings = $.extend(false,params,settings);
+                    $content = this.getContent($link);
+                    
+                    $.removeData($link.get(0),"loaded");
+                    
+                    if (settings.ajax) {
+                        $link.attr("rev", $content.attr("id"));
+                        $link.attr("href",settings.url);
+                    }else if (settings.inPage) {
+                        $link.attr("href","#"+settings.targetId);
+                    }
+
+                    if ($content.length) {
+                        if ((settings.slide && !$.isIE()) || (settings.slide && goodIE)) {
+                            $content.animate({opacity:0},100).slideUp(function() {
+                                $content.empty();                                                  
+                            });
+                        } else {
+                            $content.hide().empty();
+                        }
+                        if ($link.hasClass("tglActiveJs")) {
+                            $link.removeClass("tglActiveJs");
+                            if (settings.widgetClassName !== "") {
+                                $link.removeClass(settings.widgetClassName+"Open");
+                            }
+                        }
+                        this.toggleText(0,$link);                       
+                        
+                        if (settings.text) {
+                            $content.html(settings.content);    
+                        }
+                    }
+                }
+            }
+        }
+    },
+    getContent: function(linkElement) {
+        var $link = $(linkElement),
+            href = $link.attr("href"),
+            rev =  $link.attr("rev"), contentId,
+            $content = [];
+            
+        if ($link.length) {
+            if (href) {
+                if (href.substr(0,1) !== "#") { 
+                    if (rev) {
+                        contentId = rev;
+                    } else if (href.indexOf("#") !== -1) {
+                        contentId = href.split("#")[1];
+                    } 
+                } else {
+                    contentId = href.split("#")[1];
+                }
+                if (contentId && contentId !== "") {
+                    $content = $("#"+contentId);
+                }
+            }
+        }
+        return $content;
+    },
+    toToggleText: function(element) { // find toggle text
+        var $element = $(element),
+            str = $element.attr("title"),
+            rel = $element.attr("rel"),
+            toggleTextFounded = false;
+            
+        if (str.indexOf(rel) !== -1) {
+            toggleTextFounded = true;
+        }
+        return toggleTextFounded;
+    },
+    replaceText: function(searchText, newText, element) {
+        var $element = $(element);
+        $element.html($element.html().replace(searchText, newText));
+    },
+    toggleText: function(showState,element) {
+        var $element = $(element),
+            rel, originaltext,
+            arrRel, text;
+        
+        if (this.toToggleText($element)) {
+            rel = $element.attr("rel");
+            originaltext = $element.attr("title");
+
+            if (rel !== "") {
+                if (rel.indexOf("/") !== 0) {
+                    arrRel = rel.split("/");
+                    
+                    if (arrRel.length) {
+                        switch(showState) {
+                            case -1: // initial state
+                                text = originaltext.replace(arrRel[1], arrRel[0]);
+                                text = text.replace(arrRel[0]+"/","");
+                                this.replaceText(originaltext, text, $element);
+                                break;
+                            case 0: // Show state
+                                
+                                text = originaltext.replace(arrRel[showState+1], arrRel[showState]);    
+                                text = text.replace(arrRel[showState]+"/","");
+                                this.replaceText($element.text(), text,  $element);
+                                $element.removeClass("tglActiveJs");
+                                break;
+                            case 1: // Hide state
+                                text = originaltext.replace(arrRel[showState-1], arrRel[showState]);    
+                                text = text.replace("/"+arrRel[showState],"");
+                                this.replaceText($element.text(), text,  $element);                         
+                                $element.addClass("tglActiveJs");
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+    },
+    animateText: function($element, $content) {
+        var widgetClassName = "",
+            settings = $.data($element.get(0),"settings"),
+            isIE = $.isIE(), goodIE = $.isIE(">8");
+        
+        if (!settings) { 
+            settings = this.defaults;
+            $.data($element.get(0),"settings", settings);
+        }
+        
+        if ($.isFunction($.getJsClassName)) {
+            widgetClassName = $.getJsClassName($element);
+            $element.addClass(widgetClassName);
+            
+            // default state opened?closed
+            if (!$element.hasClass(widgetClassName+"Open")) {
+                $content.hide();
+            }           
+        }
+
+        if (widgetClassName !== "") {
+            $element.toggleClass(widgetClassName+"Open");
+        }
+        
+        if (!$content.is(":visible")) {
+            if ((settings.slide && !$.isIE()) || (settings.slide && goodIE)) {
+                $content.css("opacity",0).slideDown(function() {
+                    $content.animate({opacity:1},"fast");
+                });
+            } else {
+                $content.css("opacity",1).show();
+                if (isIE) { 
+                    $.removeInlineCSSProp($content, "filter");
+                    $.hasLayout($content);                  
+                }
+            }
+        } else {
+            if ((settings.slide && !$.isIE()) || (settings.slide && goodIE)) {
+                $content.animate({opacity:0},100).slideUp();
+            } else {            
+                $content.hide();
+                if (isIE) { 
+                    $.removeInlineCSSProp($content, "filter");                  
+                    $.hasLayout($content);
+                }
+            }
+        }
+        $.hasLayout($content);
+
+        this.toggleText($element.hasClass("tglActiveJs")?0:1,$element);
+		
+		if ($.isFunction(settings.callBack)) {
+			settings.callBack.apply(this,[$element]);	
+		}
+    }
+};
+/**************************************************************/
+// jQuery function: getJsClassName()
+//
+// Developped by: Son Pham
+//
+// Description: Extract className use for JS trigger to the CSS
+//              ClassName
+//
+// Exemple: hScrollBarJs -> will become hScrollBar
+//
+// requirement: 1) jQuery 1.3.2
+//              2) selector (can be a string or object)
+//
+// Note: 1) if you have multiple instance of className with Js
+//          example: <div class='hScrollBarJs toolTip'></div>
+//          the first occurence of Js will be returned e.g hScrollBar
+//
+//       2) specific for Bell.ca
+//
+// usage:   1) $.getJsClassName(".hScrollBarJs");
+//          2) $.getJsClassName("hScrollBarJs");
+//          3) $.getJsClassName($(".cBox"));
+/**************************************************************/    
+jQuery.getJsClassName =  function(selector) {
+    var strSelector = selector,
+        objClass, hasJs, i;
+    
+    if (typeof(selector) === "object") {
+        objClass = $(selector).attr("class").split(" ");
+        hasJs = false;
+        for (i=0;i<objClass.length;i++) {
+            if (objClass[i].indexOf("Js") !== -1) {
+                strSelector = objClass[i];
+                hasJs = true;
+                break;
+            }
+        }
+        if (!hasJs) {
+            strSelector = "";   
+        }
+    } 
+    if (strSelector.indexOf(".") !== -1) {
+        strSelector = strSelector.substr(1,strSelector.length-3);
+    } else {
+        strSelector = strSelector.substr(0,strSelector.length-2);
+    }
+    return strSelector;
+};
+/***************************************************/
+//  Function: $.setClassToNthChild()
+//
+//  Developped by: Son Pham
+//
+//  description: Set a className to a nth-position of a selector
+//
+//  requirement: 1) jQuery 1.3.2+
+//
+//  usage:  1) $.setClassToNthPosition("ul li",3,"colLast");
+//          2) $.setClassToNthPosition($("ul>li"),5,"endOfRow");
+//
+// params : 
+//  @selector : (string/object) list of html elements to apply className
+//  @nTh : (number) nth number for each to apply the className
+//  @className: (string) css className to apply when nth-child is founded
+/**********************************************************/
+jQuery.setClassToNthPosition = function(selector, nTh, className) {
+    var $element;
+    if (selector && !isNaN(nTh)) {      
+        $(selector).each(function(idx) {
+            $element = $(this);
+			$element.removeClass(className);
+			if (idx!==0 && (idx+1)%nTh===0) {
+                $element.addClass(className);
+            }
+        });
+    }
+};
 })(jQuery);
