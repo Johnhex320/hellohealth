@@ -16,7 +16,7 @@
 <div id="header">
     <div id="header-wrapper" class="container_6">
         <div class="grid_6">
-            <img id="logo" src="media/images/logo-hello-health.png" alt="Hello Health logo" />
+            <img id="logo" src="/wp-content/themes/twentyten/logo-hello-health.png" alt="Hello Health logo" />
             <ul id="navigation-primary" class="menu">
             	<li class="first"><a href="index.html" rel="index" title="">Home</a><span></span></li>
                 <li><a href="why.html" rel="section" title="">Why Hello Health</a></li>
@@ -34,7 +34,7 @@
     <div class="container_6">
         <div class="grid_6">
             <div id="login">
-                <img src="media/images/square.png" alt="" />
+                <img src="/wp-content/themes/twentyten/square.png" alt="" />
                 <ul>
                     <li class="first"><a href="#sign-in" id="button-login">Login</a></li>
                     <li><a href="#" rel="external">Sign Up</a></li>
@@ -44,9 +44,9 @@
                     	<legend>Sign In form</legend>
                         <h2>Sign In</h2>
 						<label for="username">Username</label>
-                        <input type="text" name="username" id="username" /><br />
+                        <input type="text" name="username" id="username" class="text-field" /><br />
 						<label for="password">Password</label>
-                        <input type="password" name="password" id="password" />
+                        <input type="password" name="password" id="password" class="text-field" />
                         <input type="submit" name="submit" id="submit" value="Login" />
                         <div class="action"><a href="#">Login</a></div>
                         <p>Not on Hello Health? <a href="#">Join Today</a></p>
@@ -73,37 +73,97 @@
  		<h2>That means it’s simple to practice on your terms.</h2>
         <p>And, depending on your needs, we have a range of success management resources that will help you be a success story from day one, whatever model you choose. See some of the marketing material from our Turn Us On campaign, available to doctors adding-on Hello Health empowered services to their practices. The first step is to speak to us!</p>
 
+		<!-- noformat on -->
         <div class="note play singular">
-        	Get Started by telling us about your practice. <a href="http://www.youtube.com/v/ZSeopz6wcLs" rel="video" class="more lightBoxJs" title="">Click to open eform.</a>
+        	Get Started by telling us about your practice. <a href="#eform" class="more tglJs" rel="Click to open/Click to close" title="">Click to open/Click to close eform.</a>
         </div>    
+
+		<div id="eform" class="box">
+        	<form name="eform" class="eform">
+            	<fieldset>
+                	<legend>eForm</legend>
+                    <span class="form-align-field notes">* Required Information</span>
+                    <p>
+                    	<label for="first-name">First Name*:</label>
+                    	<input type="text" id="first-name" name="first-name" class="text-field" />
+                    </p>
+                    <p>
+                    	<label for="last-name">Last Name*:</label>
+                    	<input type="text" id="last-name" name="last-name" class="text-field" />
+                    </p>
+                    <p>
+                    	<label for="practice-name">PRACTICE NAME*:</label>
+                    	<input type="text" id="practice-name" name="practice-name" class="text-field" />
+                    </p>
+                    <p>
+                    	<label for="license-number">License number*:</label>
+                    	<input type="text" id="license-number" name="license-number" class="text-field" />
+                    </p>
+                    <p>
+                    	<label for="e-mail">E-mail*:</label>
+                    	<input type="text" id="e-mail" name="e-mail" class="text-field" />
+                    </p>
+                    <p>
+                    	<label for="web-site-url">Web Site URL:</label>
+                    	<input type="text" id="web-site-url" name="web-site-url" class="text-field" />
+                    </p>
+                    <p>
+                    	<label for="phone">Phone*:</label>
+                    	<input type="text" id="phone" name="phone" class="text-field" />
+                    </p>
+                    <p>
+                    	<label for="address-line-1">Address Line 1*:</label>
+                    	<input type="text" id="address-line-1" name="address-line-1" class="text-field" />
+                    </p>
+                    <p>
+                    	<label for="address-line-2">Address Line 2:</label>
+                    	<input type="text" id="address-line-2" name="address-line-2" class="text-field" />
+                    </p>
+                    <p>
+                    	<label for="city">City*:</label>
+                    	<input type="text" id="city" name="city" class="text-field" />
+                    </p>
+                    <p>
+                    	<label for="state">State*:</label>
+                    	<input type="text" id="state" name="state" class="text-field" />
+                    </p>
+                    <p>
+                    	<label for="zip-code">Zip Code*:</label>
+                    	<input type="text" id="zip-code" name="zip-code" class="text-field" />
+                    </p>
+                    <p>
+                    	<label for="speciality">Speciality*:</label>
+                    	<input type="text" id="speciality" name="speciality" class="text-field-large" />
+                    </p>
+                    <p>
+                    	<label for="other-speciality">Other Speciality:</label>
+                    	<input type="text" id="other-speciality" name="other-speciality" class="text-field-large" />
+                    </p>
+                    <p>
+                    	<label for="existing-practice-type">Existing Practice Type:</label>
+                    	<input type="text" id="existing-practice-type" name="existing-practice-type" class="text-field-large" />
+                    </p>
+                    <p class="form-align-top">
+                    	<label for="interests">What interests you <span>about Hello Health:</span></label>
+                    	<textarea id="interests" name="interests" class="text-field-large"></textarea>
+                    </p>
+					
+                    <div class="form-actions form-align-field">
+                    	<input type="image" src="/wp-content/uploads/2010/09/button-submit-1.png" class="image" alt="Submit" />
+                    	<p class="notes">
+                        	By clicking Submit you agree to Hello Health <a href="#" rel="section" class="no-style">Terms and Conditions</a> and <a href="#" rel="section" class="no-style">Privacy Policy</a>
+                        </p>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <!-- noformat off -->
 
  		<h2>Turn Us On! And your practice. And your patients.</h2>
         <p>We’ve created the On Campaign to help you communicate the value of signing up for Hello Health to your patients. It’s all about turning your practice and relationships on, online that is. The materials are personal, fun and a little bit cheeky but with a serious message about the importance of being connected. We’ve shown a selection of them here.</p>
         <p>They’re all part of our Success Management program. Talk to us about how Turn Us On can be customized for your Hello Health empowered practice!</p>
-        <!--
-        <div class="base">
-            <div id="figure-1" class="bubble">
-                <h3>1. Online Brand</h3>
-                <p class="description">See some of the marketing material including web, emails and social media</p>
-            </div>
-            <div id="figure-2" class="bubble wide">
-                <h3>2. In practice marketing tools</h3>
-                <p class="description">Posters, buttons, a call to action in your office.</p>
-            </div>
-            <div id="figure-3" class="bubble">
-                <h3>3. Direct Mail</h3>
-                <p class="description">Start the dialogue by signing up your patients postcrads, letters marketing material </p>
-            </div>
-            <div id="figure-4" class="bubble">
-                <h3>4. Hello Health primer</h3>
-                <p class="description">The details, simple and clear </p>
-            </div>
-            
-            <img class="illustration"  src="media/images/program.jpg" alt="Program" />
-            <div class="clear"></div>
-    	</div>
-        -->
-            <img class="illustration"  src="media/images/program2.jpg" alt="Program" />
+
+        <img class="illustration"  src="/wp-content/themes/twentyten/program2.jpg" alt="Program" />
 
     </div>
 </div>

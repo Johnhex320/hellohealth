@@ -19,6 +19,20 @@ get_header(); ?>
 
 <?php the_content(); ?>
 
+<?php
+	/**************************************
+	/* Put here pages sepcifics exceptions
+	/**************************************/
+?>	
+
+<?php // Exception: Technology
+	if ($post->ID == 52) : // 52 = technology page
+	?>
+		<script>$(function() { $("#dynamic-link").attr("href", "<?php hh_release_latest_link($post->ID); ?>"); });</script>
+  	<?php
+	endif;
+?>
+
  <!-- REALLY stop The Loop. -->
  <?php endwhile;endif; ?>
 

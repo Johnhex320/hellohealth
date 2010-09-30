@@ -13,9 +13,9 @@
                     	<legend>Sign In form</legend>
                         <h2>Sign In</h2>
 						<label for="username">Username</label>
-                        <input type="text" name="username" id="username" /><br />
+                        <input type="text" name="username" id="username" class="text-field" /><br />
 						<label for="password">Password</label>
-                        <input type="password" name="password" id="password" />
+                        <input type="password" name="password" id="password" class="text-field" />
                         <input type="submit" name="submit" id="submit" value="Login" />
                         <div class="action"><a href="#">Login</a></div>
                         <p>Not on Hello Health? <a href="#">Join Today</a></p>

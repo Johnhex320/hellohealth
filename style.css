@@ -80,6 +80,7 @@ h1, a, .comments span,
 .base {
 	position: relative;
 }
+
 #header, #footer,
 #buzz, #widget-buzz,
 #video-listing, .video-4 .box-border,
@@ -111,7 +112,8 @@ h1, a, .comments span,
 #splash #content-shadow {
 	display: none;
 }
-#splash .more:hover {
+#splash .more:hover,
+#login label {
 	color: #000 !important;
 }
 #splash #header,
@@ -171,7 +173,7 @@ h1, a, .comments span,
 
 .menu li {
 	float: left;
-	padding: 15px 13px 10px;
+	padding: 15px 12px 10px;
 	background: transparent url(/wp-content/themes/twentyten/media/images/nav-primary-separator.gif) no-repeat 0 100%;
 }
 .menu li.first {
@@ -232,11 +234,6 @@ h1, a, .comments span,
 	display: inline-block;
 	padding-bottom: 10px;
 }
-#login input {
-	border: 1px solid #767676;
-	padding: 5px;
-	font-size: 1em;
-}
 #login h2 {
 	padding-left: 105px;
 	text-transform: uppercase;
@@ -286,7 +283,7 @@ h1, a, .comments span,
 	display: none;
 }
 #cover {
-	background: #d1d1d1 url(/wp-content/themes/twentyten/media/images/1688x760_Nee_Home_R3.jpg) no-repeat 46.5% 0;
+	background: #d1d1d1 url(/wp-content/themes/twentyten/media/images/1688x240_Caro.jpg) no-repeat 46.5% 0;
 	position: relative;
 	padding-bottom: 15px;
 	font-size: 1.125em;
@@ -294,6 +291,7 @@ h1, a, .comments span,
 	width: 100%;
 }
 #home #cover {
+	background-image: url(/wp-content/themes/twentyten/media/images/1688x760_Nee_Home_R3.jpg);
 	background-position: 46.5% -38px;
 	height: auto;
 }
@@ -543,7 +541,8 @@ h1, a, .comments span,
 	margin-top: 5px;
 }
 #widget-buzz .intro,
-.archive a {
+.archive a,
+.no-style {
 	color: #000;
 }
 .author {
@@ -703,15 +702,24 @@ dt {
 #video-listing .first {
 	margin-top: -5px;
 }
-.note, .play {
+.note, .play, .box {
 	padding: 11px;
 	-webkit-border-radius: 15px;
 	-moz-border-radius: 15px;
 	border-radius: 15px;
-	padding-left: 71px;
-	background: #f0f0f0 url(/wp-content/themes/twentyten/media/images/button-play-note.png) no-repeat 16px 6px;
 	line-height: 1;
 	margin: 20px 0;
+	background-color: #f0f0f0;
+}
+.box {
+	padding-top: 22px;
+	padding-bottom: 22px;
+}
+.note, .play {
+	padding-left: 71px;
+	background-image:url(/wp-content/themes/twentyten/media/images/button-play-note.png);
+	background-repeat: no-repeat;
+	background-position: 16px 6px;
 }
 .note.play .more,
 .note.plus .more {
@@ -874,4 +882,56 @@ dt {
 .vCard p {
 	margin-top: 0.3em;
 	margin-bottom: 0;
+}
+.text-field,
+.text-field-large {
+	border: 1px solid #767676;
+	padding: 5px;
+	font-size: 1em;
+}
+.eform .text-field-large {
+	width: 480px;
+}
+.eform label {
+	width: 270px;
+	display: inline-block;
+	text-align: right;
+}
+.eform input {
+	width: 320px;
+}
+.eform input.image {
+	width: auto;
+}
+.eform .form-align-field {
+	display: block;
+	padding-left: 270px;
+}
+.eform p {
+	margin: 0.5em 0;
+}
+form .notes {
+	font-size: 0.75em;
+}
+textarea {
+	height: 130px;
+}
+label span {
+	display: inline-block;
+}
+.form-align-top {
+	position: relative;
+}
+.form-align-top label {
+	position: absolute;
+	top: 5px;
+}
+.eform .form-align-top textarea {
+	margin-left: 275px;
+}
+.pushUp {
+	margin-top: 2em !important;
+}
+.no-margins {
+	margin: 0 !important;
 }
