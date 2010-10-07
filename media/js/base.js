@@ -50,6 +50,13 @@
 				$("#username").focus();
 				return false;
 			});
+			
+			$("a[rel*='external']").each(function() {
+				$(this).click(function() {
+					window.open(this.href);
+					return false;
+				});
+			});
 		}
 	};
 	

@@ -509,6 +509,7 @@ function hh_body_ID() {
 	endif;
 }
 function hh_page_menu($pageType, $pagePosition, $id, $cssClass, $includeHome) {
+	global $post;
 	$pages = get_pages("parent=0&sort_column=menu_order");
 	$countPages = count($pages);
 	if ($countPages > 0):
@@ -522,6 +523,12 @@ function hh_page_menu($pageType, $pagePosition, $id, $cssClass, $includeHome) {
 			
 			if ($counter != 0) : 
 				$class = "";
+			endif;
+			
+			if ($page->ID == $post->ID) :
+				$class .= " active";
+			else:
+				$class = str_replace(" active", "", $class);
 			endif;
 			
 			if (($pgType == $pageType) && ($pgPosition == $pagePosition)) :
@@ -561,7 +568,7 @@ function hh_release_latest_link($postId) {
 }
 
 function hh_generate_archive($parentPostId, $currentPostId) {
-	$pages = hh_get_page_children($parentPostId);
+	$pages = hh_get_page_children($parentPostId, "menu_order");
 	$currentPost = get_page($currentPostId);
 	
 	foreach ($pages as $pageId => $page) {

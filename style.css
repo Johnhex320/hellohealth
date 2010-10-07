@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* CSS Document */
 body {
-	font: 16px/1.3 Arial, Helvetica, sans-serif;
+	font: 16px/1.3 "Lucida Grande","Lucida Sans Unicode",Arial, Helvetica, sans-serif;
 	color: #000;
 }
 
@@ -25,22 +25,33 @@ h4 {
 	margin-top: 1em;
 	font-weight: bold;
 }
+h1, h2, h3, h4 {
+	font-family: Arial, Helvetica, sans-serif;
+}
 
 a {
 	text-decoration: none;
 }
-a:hover {
+a:hover,
+.menu .active a  {
 	text-decoration: underline;
 }
 legend {
 	display: none;
+}
+#content ul {
+	margin:1em 0 1em 17px;
+}
+#content li {
+	list-style-type:disc;
+	padding-left:6px;
 }
 .release h3 {
 	display: inline-block;
 }
 
 #home h1 {
-	margin: 100px 0 0.5em;
+	margin: 80px 0 0.5em;
 }
 #university h1{
 	margin-top: 175px;
@@ -75,7 +86,7 @@ h1, a, .comments span,
 	position: relative;
 }
 #home #content {
-	padding-top: 15px;
+	padding-top: 0px;
 }
 .base {
 	position: relative;
@@ -93,9 +104,6 @@ h1, a, .comments span,
 #splash #cover {
 	background-color: #4a8cca;
 }
-#splash #banner img {
-	padding-top: 35px;
-}
 
 #splash #navigation-primary {
 	visibility: hidden;
@@ -108,8 +116,12 @@ h1, a, .comments span,
 #splash .more {
 	color: #fff !important;
 }
+#splash #banner {
+	padding-top: 25px;
+}
 #splash #content,
-#splash #content-shadow {
+#splash #content-shadow,
+#splash #login {
 	display: none;
 }
 #splash .more:hover,
@@ -132,7 +144,7 @@ h1, a, .comments span,
 #splash .play {
 	background-color: transparent;
 }
-#splash .play p {
+#splash .figure p {
 	margin-top: 0.25em;
 }
 #splash .content {
@@ -144,10 +156,8 @@ h1, a, .comments span,
 	padding-bottom: 0;
 	width: auto;
 }
-
-.video-action-1 {
-	background-image: url(/wp-content/themes/twentyten/media/images/macbook.gif);
-	background-repeat: no-repeat;
+#splash .figure img {
+	float: left;
 }
 #header-wrapper {
 	position: relative;
@@ -159,7 +169,7 @@ h1, a, .comments span,
 
 #logo {
 	position: absolute;
-	top: 106px;
+	top: 65px;
 	left: 0;
 	z-index: 9999;
 	display: none;
@@ -168,13 +178,13 @@ h1, a, .comments span,
 	display: block;
 }
 #navigation-primary {
-	margin-top: 28px;
+	margin-top: -5px;
+	font-family: Arial, Helvetica, sans-serif; /* Cufon text-decoration bug fixed */
 }
-
 .menu li {
 	float: left;
-	padding: 15px 12px 10px;
-	background: transparent url(/wp-content/themes/twentyten/media/images/nav-primary-separator.gif) no-repeat 0 100%;
+	padding: 10px 12px 8px;
+	background: transparent url(/wp-content/themes/twentyten/media/images/nav-primary-separator.gif) no-repeat 0 13px;
 }
 .menu li.first {
 	background: none;
@@ -291,7 +301,7 @@ h1, a, .comments span,
 	width: 100%;
 }
 #home #cover {
-	background-image: url(/wp-content/themes/twentyten/media/images/1688x760_Nee_Home_R3.jpg);
+	background-image: url(/wp-content/uploads/2010/10/1688x668_Neelan_R0.jpg);
 	background-position: 46.5% -38px;
 	height: auto;
 }
@@ -364,10 +374,19 @@ h1, a, .comments span,
 #banner .intro {
 	width: 81%;
 }
+#home #banner .intro {
+	font-size: 0.875em;
+	margin-bottom: 0.875em;
+}	
 .box-video {
 	background-color: #6d6d6d;
 	position: relative;
 	margin-top: 0.4em;
+	height: 170px;
+	overflow: hidden;
+}
+.box-video-feature {
+	height: auto;
 }
 .date,
 .post-age {
@@ -415,7 +434,6 @@ h1, a, .comments span,
 }
 .box-video img {
 	float: right;
-	margin-top: -10px;
 }
 .box-video p {
 	font-size: 0.7em;
@@ -474,8 +492,11 @@ h1, a, .comments span,
 }
 #widget-buzz h4 {
 	font-size: 2em;
+	margin-top: 0.3em;
 }
-
+#widget-buzz .twitter-content h4 {
+	margin-top: 0;
+}
 #buzz h2 {
 	display: inline-block;
 	font-weight: bold;
@@ -509,6 +530,7 @@ h1, a, .comments span,
 }
 #buzz .content {
 	background: transparent url(/wp-content/themes/twentyten/media/images/background-widget-buzz.gif) repeat-y 0 15px;
+	padding-bottom: 15px;
 }
 .content-inner {
 	border-right:1px solid #9c9c9c;
@@ -539,6 +561,9 @@ h1, a, .comments span,
 }
 .intro {
 	margin-top: 5px;
+}
+#home .intro {
+	margin-bottom: 0;
 }
 #widget-buzz .intro,
 .archive a,
@@ -791,7 +816,7 @@ dt {
 .bubble {
 	position: absolute;
 	width: 254px;
-	top: 25px;
+	top: 55px;
 }
 .bubble.wide {
 	width: 327px;
@@ -800,19 +825,20 @@ dt {
 	color: #e88600;
 }
 #figure-1 {
-	left: 0;
+	left: 39px;
 	top: 65px;
 }
 #figure-2 {
-	left:189px;
-	top:520px;
+	left:75px;
+	top:504px;
 }
 #figure-3 {
 	left:700px;
 }
 #figure-4 {
-	left:700px;
-	top: 560px;
+	left:625px;
+	top:580px;
+	width:300px;
 }
 
 #lbOverlay {
@@ -839,7 +865,7 @@ dt {
 }
 #home #content .shadow {
 	position: absolute;
-	top: 57px;
+	top: 42px;
 	width: 960px;
 	z-index: 999;
 }
@@ -847,7 +873,10 @@ dt {
 	color: #fff;
 }
 .archive {
-	margin-top: 1em;
+	margin: 1em 0;
+}
+.archive li {
+	padding-left: 0;
 }
 .information {
 	float: right;

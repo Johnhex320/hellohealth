@@ -6,7 +6,7 @@
                 <img src="<?php bloginfo('template_directory'); ?>/media/images/square.png" alt="" />
                 <ul>
                     <li class="first"><a href="#sign-in" id="button-login">Login</a></li>
-                    <li><a href="#" rel="external">Sign Up</a></li>
+                    <li><a href="#" rel="external">Support</a></li>
                 </ul>
                 <form id="sign-in" action="">
                 	<fieldset>

@@ -17,7 +17,7 @@ Template Name: Biography
 		<h2>Team Members</h2>        
 		<div class="grid_2 alpha">
             <ul class="archive">	
-				<?php hh_generate_archive(2, $post->ID); // 2 = about page id ?>
+				<?php hh_generate_archive(288, $post->ID); // 288 = team members page id ?>
             </ul>
         </div>
         
