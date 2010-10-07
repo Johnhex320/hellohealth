@@ -35,6 +35,9 @@ a:hover {
 legend {
 	display: none;
 }
+ul li {
+	padding-left: 30px;
+}
 .release h3 {
 	display: inline-block;
 }
