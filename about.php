@@ -14,25 +14,25 @@ Template Name: About
     	<div id="members">
     	<?php 
 			$members = hh_get_page_children(98, "menu_order"); // 98 = Business card page 
-			
+			$i = 1;
 			foreach ($members as $memberId => $member) {
+				if ($i%3 == 1 && $i != 0) :
+					$cssClass = "alpha";
+					echo '<div class="clear"></div>';
+				elseif ($i%3 == 0):
+					$cssClass = "omega";
+				else:
+					$cssClass = "";
+				endif;
 		?>
-            <div class="grid_2 team">
+            <div class="grid_2 team <?php echo $cssClass; ?>">
 				<?php echo $member->post_content; ?>		
             </div>
-      <?php } ?>
+      <?php 
+	  			$i++;
+			} 
+		?>
 		</div>
-        
-        <script>
-			$(function() {
-				var $hhMembers = $("#members .grid_2");
-				if ($hhMembers.length) {
-					$.setClassToNthPosition($hhMembers,3,"omega");
-					$.setClassToNthPosition($hhMembers,4,"alpha");
-					$($hhMembers[0]).addClass("alpha");
-				}
-			});
-		</script>
     
  <!-- REALLY stop The Loop. -->
  <?php endwhile;endif; ?>

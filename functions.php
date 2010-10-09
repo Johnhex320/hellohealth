@@ -508,45 +508,71 @@ function hh_body_ID() {
 		}
 	endif;
 }
-function hh_page_menu($pageType, $pagePosition, $id, $cssClass, $includeHome) {
+function hh_page_menu($pagePosition, $htmlId, $cssClass, $includeHome) {
 	global $post;
-	$pages = get_pages("parent=0&sort_column=menu_order");
+
+	$parentId = hh_get_root_parent($post->ID);
+	$pages = hh_get_page_children($parentId, "menu_order");
 	$countPages = count($pages);
-	if ($countPages > 0):
-		$counter = 0;
-		$class = "first";
+
+	$counter = 0;
+	$class = "first";
+	$title = "";
+
+	echo '<ul id="'.$htmlId.'" class="'.$cssClass.'">';
 	
-		echo '<ul id="'.$id.'" class="'.$cssClass.'">';	
-		foreach ($pages as $page) {
-			$pgType = get_post_meta($page->ID, "helloHealth_pageTypeId", true);
-			$pgPosition = get_post_meta($page->ID, "helloHealth_pagePositionId", true);
+	if ($includeHome == 1) :
+		if ($parentId == $post->ID) :
+			$class .= " active";	
+		endif;
+		
+		$page = get_page($parentId);
+		
+		echo '<li class="'.$class.'"><a href="'.get_page_link($parentId).'" rel="index" title="'.$page->post_title.'">'.hh_strip_home_title($page->post_title).'</a></li>';
+	endif;
+	
+	foreach ($pages as $page) {
+		$pgPosition = get_post_meta($page->ID, "helloHealth_pagePositionId", true);
+		
+		if ($includeHome == 1 || $counter != 0) : 
+			$class = "";
+		endif;
+		
+		if ($page->ID == $post->ID) :
+			$class .= " active";
+		else:
+			$class = str_replace(" active", "", $class);
+		endif;
+		
+		if ($pgPosition == $pagePosition) :
+			$title = $page->post_title;
+			$option = '<li class="'.$class.'"><a href="'.get_page_link($page->ID).'" rel="section" title="'.$title.'">';
+		
+			$title = hh_strip_home_title($title);
 			
-			if ($counter != 0) : 
-				$class = "";
-			endif;
-			
-			if ($page->ID == $post->ID) :
-				$class .= " active";
-			else:
-				$class = str_replace(" active", "", $class);
-			endif;
-			
-			if (($pgType == $pageType) && ($pgPosition == $pagePosition)) :
-				$option = '<li class="'.$class.'"><a href="'.get_page_link($page->ID).'" rel="section" title="'.$page->post_title.'">';
-				$option .= $page->post_title;
-				$option .= '</a></li>';
-				echo $option;
-				$counter++;
-			endif;
-		}
-		echo '</ul>';
-		?>
-        <script>
-			$("#<?php echo $id ?> li:last").addClass("last");
-		</script>
-        <?php
+			$option .= $title;
+			$option .= '</a></li>';
+			echo $option;
+			$counter++;
+		endif;
+	}
+	echo '</ul>';
+	?>
+	<script>
+		$("#<?php echo $htmlId ?> li:last").addClass("last");
+	</script>
+	<?php
+}
+
+function hh_strip_home_title($title) {
+	if (strrpos($title, "Home")==0) :
+		return str_replace(" Support","",str_replace(" Physicians","", str_replace(" Patients","", $title)));
+	else:
+		return $title;
 	endif;
 }
+
+
 function hh_get_page_children($parentPostId, $sort_column = "") {
 	// Set up the objects needed
 	$sort_column_param = "";
@@ -581,4 +607,11 @@ function hh_generate_archive($parentPostId, $currentPostId) {
 			echo '<li><a href="'.get_page_link($page->ID).'" class="'.$class.'">'.$page->post_title.'</a></li>';
 		endif;
 	}
+}
+
+function hh_get_root_parent($pageId) {
+	global $wpdb;
+	$parent = $wpdb->get_var("SELECT post_parent FROM $wpdb->posts WHERE post_type='page' AND ID = '$pageId'");
+	if ($parent == 0) return $pageId;
+	else return hh_get_root_parent($parent);
 }

@@ -5,7 +5,7 @@
 			/*global Cufon*/
 			if ($.isFunction(Cufon)) {
 				Cufon.replace("h1");
-				Cufon.replace(".menu > li > a, #login ul a, #login form h2, .member-name");
+				Cufon.replace(".menu > li > a, #login ul a, #login form h2, .member-name, #search-form label");
 				Cufon.replace("#cover h1");
 				//Cufon.replace("#navigation-secondary a");
 			}
@@ -53,6 +53,7 @@
 			
 			$("a[rel*='external']").each(function() {
 				$(this).click(function() {
+					/*global window */
 					window.open(this.href);
 					return false;
 				});
