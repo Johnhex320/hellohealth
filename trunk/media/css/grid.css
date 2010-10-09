@@ -19,6 +19,7 @@
 ----------------------------------------------------------------------------------------------------*/
 
 .grid_1,
+.grid_1_5,
 .grid_2,
 .grid_3,
 .grid_4,
@@ -29,6 +30,11 @@
 	position: relative;
 	margin-left: 10px;
 	margin-right: 10px;
+}
+
+.grid_1_5 {
+	margin-left: 10px;
+	margin-right: 9px;
 }
 
 /* Grid >> Children (Alpha ~ First, Omega ~ Last)
@@ -47,6 +53,10 @@
 
 .container_6 .grid_1 {
 	width:140px;
+}
+
+.container_6 .grid_1_5 {
+	width:221px;
 }
 
 .container_6 .grid_2 {
@@ -78,6 +88,10 @@
 	padding-left:160px;
 }
 
+.container_6 .prefix_1_5 {
+	padding-left:237px;
+}
+
 .container_6 .prefix_2 {
 	padding-left:320px;
 }
@@ -101,6 +115,10 @@
 
 .container_6 .suffix_1 {
 	padding-right:160px;
+}
+
+.container_6 .suffix_1_5 {
+	padding-right:237px;
 }
 
 .container_6 .suffix_2 {
@@ -128,6 +146,10 @@
 	left:160px;
 }
 
+.container_6 .push_1_5 {
+	left:237px;
+}
+
 .container_6 .push_2 {
 	left:320px;
 }
@@ -151,6 +173,10 @@
 
 .container_6 .pull_1 {
 	left:-160px;
+}
+
+.container_6 .pull_1_5 {
+	left:-237px;
 }
 
 .container_6 .pull_2 {

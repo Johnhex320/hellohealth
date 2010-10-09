@@ -588,10 +588,10 @@ dt {
 #content-primary .inner {
 	padding-right: 15px;
 }
-#content-primary h3.first {
+#home #content h3.first {
 	margin-top: 0;
 }
-#content-primary h3 {
+#home #content h3 {
 	margin-top: 10px;
 }
 #aside-content a {

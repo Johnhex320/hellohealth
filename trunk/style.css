@@ -56,9 +56,6 @@ legend {
 #university h1{
 	margin-top: 175px;
 }
-body#splash {
-	background-color: #4a8cca;
-}
 
 h1, a, .comments span,
 .external span,
@@ -66,7 +63,7 @@ h1, a, .comments span,
 #content-secondary .intro,
 .note, .listing, .hType2,
 .release h3, form h2,
-#home #content-primary h3 {
+#home #content h3 {
 	color: #0896ff;
 }
 .genuine a:hover,
@@ -95,14 +92,11 @@ h1, a, .comments span,
 #header, #footer,
 #buzz, #widget-buzz,
 #video-listing, .video-4 .box-border,
-.role {
-	background-color: #0895ff;
-}
-
+.role, body#splash,
 #splash #header,
 #splash #footer,
 #splash #cover {
-	background-color: #4a8cca;
+	background-color: #0895ff;
 }
 
 #splash #navigation-primary {
@@ -196,12 +190,14 @@ h1, a, .comments span,
 .menu li.last {
 	padding-right: 0;
 }
-.menu a {
+.menu a,
+#search-form label {
 	color: #fff;
 	font-size: 0.875em;
 }
 .menu a,
-#login ul a {
+#login ul a,
+#search-form label {
 	text-transform: uppercase;
 }
 #login {
@@ -301,8 +297,8 @@ h1, a, .comments span,
 	width: 100%;
 }
 #home #cover {
-	background-image: url(/wp-content/uploads/2010/10/1688x668_Neelan_R0.jpg);
-	background-position: 46.5% -38px;
+	background-image: url(/wp-content/uploads/2010/10/1688x668_Neelan_R0-.jpg);
+	background-position: 46.5% -104px;
 	height: auto;
 }
 #university #cover {
@@ -382,7 +378,7 @@ h1, a, .comments span,
 	background-color: #6d6d6d;
 	position: relative;
 	margin-top: 0.4em;
-	height: 170px;
+	height: 136px;
 	overflow: hidden;
 }
 .box-video-feature {
@@ -428,15 +424,16 @@ h1, a, .comments span,
 	right: 10px;
 	z-index: 10;
 }
-.box-video h2,
+.box-video h2, 
 .box-video h3 {
-	font-size: 1em;
+	font-size:0.875em;
+	line-height:1;
 }
 .box-video img {
 	float: right;
 }
 .box-video p {
-	font-size: 0.7em;
+	font-size: 0.6em;
 }
 .box-content {
 	position: absolute;
@@ -451,7 +448,7 @@ h1, a, .comments span,
 	height: 100%;
 }
 .box-content p {
-	bottom:12px;
+	bottom:19px;
 	left:0;
 	margin:0;
 	position:absolute;
@@ -626,10 +623,10 @@ dt {
 #content-primary .inner {
 	padding-right: 15px;
 }
-#content-primary h3.first {
+#home #content h3.first {
 	margin-top: 0;
 }
-#content-primary h3 {
+#home #content h3 {
 	margin-top: 10px;
 }
 #aside-content a {
@@ -963,4 +960,10 @@ label span {
 }
 .no-margins {
 	margin: 0 !important;
+}
+
+#search-form {
+	position: absolute;
+	right: 0;
+	top: 5px;	
 }

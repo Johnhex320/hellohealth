@@ -8,6 +8,9 @@
  * @subpackage Twenty_Ten
  * @since Twenty Ten 1.0
  */
+ 
+ 	define("SUPPORT_POST_ID",374);
+ 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html <?php language_attributes(); ?>>
@@ -42,12 +45,6 @@
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <?php
-	/* We add some JavaScript to pages with the comment form
-	 * to support sites with threaded comments (when in use).
-	 */
-	if ( is_singular() && get_option( 'thread_comments' ) )
-		wp_enqueue_script( 'comment-reply' );
-
 	/* Always have wp_head() just before the closing </head>
 	 * tag of your theme, or you will break many plugins, which
 	 * generally use this hook to add elements to <head> such
@@ -59,66 +56,25 @@
 
 <body <?php echo hh_body_ID(); ?> <?php body_class(); ?>>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/media/js/init.js"></script>
-<!--
-<div id="wrapper" class="hfeed">
-	<div id="header">
-		<div id="masthead">
-			<div id="branding" role="banner">
-				<?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div'; ?>
-				<<?php echo $heading_tag; ?> id="site-title">
-					<span>
-						<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
-					</span>
-				</<?php echo $heading_tag; ?>>
-				<div id="site-description"><?php bloginfo( 'description' ); ?></div>
-
-				<?php
-					// Check if this is a post or page, if it has a thumbnail, and if it's a big one
-					if ( is_singular() &&
-							has_post_thumbnail( $post->ID ) &&
-							( /* $src, $width, $height */ $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'post-thumbnail' ) ) &&
-							$image[1] >= HEADER_IMAGE_WIDTH ) :
-						// Houston, we have a new header image!
-						echo get_the_post_thumbnail( $post->ID, 'post-thumbnail' );
-					else : ?>
-						<img src="<?php header_image(); ?>" width="<?php echo HEADER_IMAGE_WIDTH; ?>" height="<?php echo HEADER_IMAGE_HEIGHT; ?>" alt="" />
-					<?php endif; ?>
-			</div>
-            -->
-            <!-- #branding -->
-
-<!--
-			<div id="access" role="navigation">
-			  <?php /*  Allow screen readers / text browsers to skip the navigation menu and get right to the good stuff */ ?>
-				<div class="skip-link screen-reader-text"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'twentyten' ); ?>"><?php _e( 'Skip to content', 'twentyten' ); ?></a></div>
-				<?php /* Our navigation menu.  If one isn't filled out, wp_nav_menu falls back to wp_page_menu.  The menu assiged to the primary position is the one used.  If none is assigned, the menu with the lowest ID is used.  */ ?>
-				<?php wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary' ) ); ?>
-			</div>-->
-            <!-- #access -->
-		<!--</div>-->
-        <!-- #masthead -->
-	<!--</div>-->
-    <!-- #header -->
-
-<!--	<div id="main"> -->
 
 <h1 class="seo">Hello Health</h1>
 <div id="header">
     <div id="header-wrapper" class="container_6">
         <div class="grid_6">
-            <?php hh_page_menu('physicians', 'header', 'navigation-primary', 'menu', 1); ?>
+			<?php hh_page_menu('header','navigation-primary','menu',1); ?>
             <img id="logo" src="<?php bloginfo('template_directory'); ?>/media/images/logo-hello-health.png" alt="Hello Health logo" />
-            <!--<ul id="navigation-primary" class="menu">-->
-                <!--
-                <li class="first"><a href="index.html" rel="index" title="">Home</a><span></span></li>
-                <li><a href="why.html" rel="section" title="">Why Hello Health</a></li>
-                <li><a href="how.html" rel="section" title="">How Physicians use Hello Health?</a></li>
-                <li><a href="technology.html" rel="section" title="">Technology</a></li>
-                <li><a href="started.html" rel="section" title="">Get Started</a></li>
-                <li class="last"><a href="university.html" rel="section" title="">Hello Health University</a></li>
-            	-->
-            <!--</ul>-->
-		</div>
+
+           	<?php if (hh_get_root_parent($post->ID) == SUPPORT_POST_ID) : ?>
+			<form id="search-form" name="search-form" role="search" action=" action="<?php bloginfo('url'); ?>">
+				<fieldset>
+                	<legend>Search Site form</legend>
+						<label class="screen-reader-text" for="search-primary">Search:</label>
+        				<input type="text" value="" name="s" id="search-primary" />
+        				<input type="submit" id="search-submit" value="Search" />
+                </fieldset>
+    		</form>
+			<?php endif; ?>
+        </div>
         <div class="clear"></div>
     </div>
 </div>

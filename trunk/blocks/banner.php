@@ -6,8 +6,16 @@
                 <img src="<?php bloginfo('template_directory'); ?>/media/images/square.png" alt="" />
                 <ul>
                     <li class="first"><a href="#sign-in" id="button-login">Login</a></li>
-                    <li><a href="#" rel="external">Support</a></li>
+                    <li><a href="/support/" rel="external">Support</a></li>
                 </ul>
+
+                <div id="sign-in">
+                   <iframe name="login" src="https://<?php echo PLATFORM_URL?>/LoginServlet/login.jsp" scrolling="no" allowtransparency="no" marginheight="0" marginwidth="0" frameborder="0" class="loginFrame"/></iframe>
+                   <p>Not on Hello Health? <a href="/join">Join Today</a></p>
+                   <p>Lost your password? <a href="/lostpassword">Lost Password</a></p>                       
+                   <p class="last">Lost your username? <a href="/lostusername">Lost Username</a></p>                       
+                </div>
+<!-- 
                 <form id="sign-in" action="">
                 	<fieldset>
                     	<legend>Sign In form</legend>
@@ -18,10 +26,11 @@
                         <input type="password" name="password" id="password" class="text-field" />
                         <input type="submit" name="submit" id="submit" value="Login" />
                         <div class="action"><a href="#">Login</a></div>
-                        <p>Not on Hello Health? <a href="#">Join Today</a></p>
+                        <p>Not on Hello Health? <a href="/join">Join Today</a></p>
                         <p class="last">Lost your password? <a href="#">Reset Password</a></p>                       
                     </fieldset>
                 </form>
+-->
                 <div class="shadow"></div>
             </div>
         </div>
