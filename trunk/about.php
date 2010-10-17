@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: About
+Template Name: Leadership Team
 */
 ?>
 <?php get_header(); ?>
@@ -13,7 +13,8 @@ Template Name: About
 	
     	<div id="members">
     	<?php 
-			$members = hh_get_page_children(98, "menu_order"); // 98 = Business card page 
+			define("BUSINESS_CARDS_POST_ID",98); // 98 = Business card page 
+			$members = hh_get_page_children(BUSINESS_CARDS_POST_ID, "menu_order");
 			$i = 1;
 			foreach ($members as $memberId => $member) {
 				if ($i%3 == 1 && $i != 0) :

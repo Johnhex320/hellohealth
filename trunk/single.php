@@ -9,18 +9,20 @@
 
 get_header(); ?>
 
-		<div id="wrapper">
-			<!--<div id="content" role="main">-->
+
 
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
-
-				<div id="nav-above" class="navigation">
+			<div class="grid_4 alpha">
+				<!--
+                <div id="nav-above" class="navigation">
 					<div class="nav-previous"><?php previous_post_link( '%link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'twentyten' ) . '</span> %title' ); ?></div>
 					<div class="nav-next"><?php next_post_link( '%link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'twentyten' ) . '</span>' ); ?></div>
-				</div><!-- #nav-above -->
+				</div>
+                -->
+                <!-- #nav-above -->
 
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<h1 class="entry-title"><?php the_title(); ?></h1>
+					<h2 class="entry-title"><?php the_title(); ?></h2>
 
 					<div class="entry-meta">
 						<?php twentyten_posted_on(); ?>
@@ -32,7 +34,8 @@ get_header(); ?>
 					</div><!-- .entry-content -->
 
 <?php if ( get_the_author_meta( 'description' ) ) : // If a user has filled out their description, show a bio on their entries  ?>
-					<div id="entry-author-info">
+					
+                    <div id="entry-author-info hide">
 						<div id="author-avatar">
 							<?php echo get_avatar( get_the_author_meta( 'user_email' ), apply_filters( 'twentyten_author_bio_avatar_size', 60 ) ); ?>
 						</div><!-- #author-avatar -->
@@ -48,23 +51,38 @@ get_header(); ?>
 					</div><!-- #entry-author-info -->
 <?php endif; ?>
 
+					<!--
 					<div class="entry-utility">
 						<?php twentyten_posted_in(); ?>
 						<?php edit_post_link( __( 'Edit', 'twentyten' ), '<span class="edit-link">', '</span>' ); ?>
-					</div><!-- .entry-utility -->
+					</div>
+                    -->
+                    <!-- .entry-utility -->
 				</div><!-- #post-## -->
 
+				<!--
 				<div id="nav-below" class="navigation">
 					<div class="nav-previous"><?php previous_post_link( '%link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'twentyten' ) . '</span> %title' ); ?></div>
 					<div class="nav-next"><?php next_post_link( '%link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'twentyten' ) . '</span>' ); ?></div>
-				</div><!-- #nav-below -->
+				</div>
+                -->
+                <!-- #nav-below -->
 
-				<?php comments_template( '', true ); ?>
+				<?php //comments_template( '', true ); ?>
+
+			</div>
 
 <?php endwhile; // end of the loop. ?>
+			
+            <div class="grid_2 omega">
+				<?php get_sidebar(); ?>
+			</div>
+            
+            <div class="clear"></div>
 
-			<!--</div>--><!-- #content -->
-		</div><!-- #container -->
-
-<?php get_sidebar(); ?>
+<script>
+	$(function() {
+		$("#banner").append('<div class="grid_6 alpha"><h1>News</h1></div><div class="clear"></div>');
+	});
+</script>
 <?php get_footer(); ?>

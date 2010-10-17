@@ -14,9 +14,6 @@
 
 get_header(); ?>
 
-		<div id="wrapper">
-			<!--<div id="content" role="main">-->
-
 <?php
 	/* Queue the first post, that way we know
 	 * what date we're dealing with (if that is the case).
@@ -27,18 +24,18 @@ get_header(); ?>
 	if ( have_posts() )
 		the_post();
 ?>
-
-			<h1 class="page-title">
-<?php if ( is_day() ) : ?>
-				<?php printf( __( 'Daily Archives: <span>%s</span>', 'twentyten' ), get_the_date() ); ?>
-<?php elseif ( is_month() ) : ?>
-				<?php printf( __( 'Monthly Archives: <span>%s</span>', 'twentyten' ), get_the_date('F Y') ); ?>
-<?php elseif ( is_year() ) : ?>
-				<?php printf( __( 'Yearly Archives: <span>%s</span>', 'twentyten' ), get_the_date('Y') ); ?>
-<?php else : ?>
-				<?php _e( 'Blog Archives', 'twentyten' ); ?>
-<?php endif; ?>
-			</h1>
+			<div class="grid_4 alpha">
+                <h2 class="page-title hide">
+    <?php if ( is_day() ) : ?>
+                    <?php printf( __( 'Daily Archives: <span>%s</span>', 'twentyten' ), get_the_date() ); ?>
+    <?php elseif ( is_month() ) : ?>
+                    <?php printf( __( 'Monthly Archives: <span>%s</span>', 'twentyten' ), get_the_date('F Y') ); ?>
+    <?php elseif ( is_year() ) : ?>
+                    <?php printf( __( 'Yearly Archives: <span>%s</span>', 'twentyten' ), get_the_date('Y') ); ?>
+    <?php else : ?>
+                    <?php _e( 'Blog Archives', 'twentyten' ); ?>
+    <?php endif; ?>
+                </h2>
 
 <?php
 	/* Since we called the_post() above, we need to
@@ -52,10 +49,21 @@ get_header(); ?>
 	 * called loop-archives.php and that will be used instead.
 	 */
 	 get_template_part( 'loop', 'archive' );
+	 
 ?>
 
-			<!--</div>--><!-- #content -->
-		</div><!-- #container -->
+		</div><!-- #grid_4 -->
+		<div class="grid_2 omega">
+			<?php get_sidebar(); ?>
+        </div>    
+        <div class="clear"></div>
 
-<?php get_sidebar(); ?>
+<script>
+	$("body").removeClass("archive").removeClass("date");
+
+	$(function() {
+		var bannerText = "<?php printf( __( 'Archives: <span>%s</span>', 'twentyten' ), get_the_date('F Y') ); ?>";
+		$("#banner").append('<div class="grid_6 alpha"><h1>'+bannerText+'</h1></div><div class="clear"></div>');
+	});
+</script>            
 <?php get_footer(); ?>

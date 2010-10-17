@@ -5,13 +5,13 @@
 			/*global Cufon*/
 			if ($.isFunction(Cufon)) {
 				Cufon.replace("h1");
-				Cufon.replace(".menu > li > a, #login ul a, #login form h2, .member-name, #search-form label");
+				Cufon.replace(".menu > li > a, #login ul a, #login form h2, .member-name p, #search-form label");
 				Cufon.replace("#cover h1");
 				//Cufon.replace("#navigation-secondary a");
 			}
 			
 			// Homepage
-			$("#buzz a").click(function() {
+			$("#buzz .action-expand").click(function() {
 				var $link = $(this),
 					$label = $link.find("span"),
 					$content = $("#"+$link.attr("href").split("#")[1]);

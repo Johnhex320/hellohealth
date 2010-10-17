@@ -1,18 +1,19 @@
 @charset "UTF-8";
 /* CSS Document */
 body {
-	font: 16px/1.3 "Lucida Grande","Lucida Sans Unicode",Arial, Helvetica, sans-serif;
+	font: 15px/1.3 "Lucida Grande","Lucida Sans Unicode",Arial, Helvetica, sans-serif;
 	color: #000;
 }
 
 h1 {
 	margin-top: 78px;
-	text-transform: uppercase;
 }
-h1, .hType1 {
+h1, .hType1,
+.member-name h2 {
 	font-size: 2em; /* 32 */
 }
-h2, .hType2 {
+h2, .hType2,
+#content .box-video-feature h2 {
 	font-size: 1.31em; /* 21 px */
 }
 h3 {
@@ -21,7 +22,8 @@ h3 {
 h3, .note, .listing {
 	font-size: 1.31em;
 }
-h4 {
+h4,
+#biography #content h3 {
 	margin-top: 1em;
 	font-weight: bold;
 }
@@ -63,7 +65,9 @@ h1, a, .comments span,
 #content-secondary .intro,
 .note, .listing, .hType2,
 .release h3, form h2,
-#home #content h3 {
+#home #content h3,
+#sidebar .widget-container h3,
+#technology #content h3 {
 	color: #0896ff;
 }
 .genuine a:hover,
@@ -142,7 +146,7 @@ h1, a, .comments span,
 	margin-top: 0.25em;
 }
 #splash .content {
-	padding-top: 59px;
+	padding: 30px 0;
 }
 #splash .content .first {
 	margin-right: 0;
@@ -195,9 +199,14 @@ h1, a, .comments span,
 	color: #fff;
 	font-size: 0.875em;
 }
+h1,
 .menu a,
 #login ul a,
-#search-form label {
+#search-form label,
+#sidebar .widget-container h3,
+#login h2,
+#widget-buzz h3 a,
+#home #content h2 {
 	text-transform: uppercase;
 }
 #login {
@@ -242,7 +251,6 @@ h1, a, .comments span,
 }
 #login h2 {
 	padding-left: 105px;
-	text-transform: uppercase;
 	padding-bottom: 15px;
 	font-size: 1em;
 }
@@ -285,9 +293,6 @@ h1, a, .comments span,
 #login .last {
 	margin-bottom: 0.3em;
 }
-#sign-in {
-	display: none;
-}
 #cover {
 	background: #d1d1d1 url(/wp-content/themes/twentyten/media/images/1688x240_Caro.jpg) no-repeat 46.5% 0;
 	position: relative;
@@ -299,6 +304,10 @@ h1, a, .comments span,
 #home #cover {
 	background-image: url(/wp-content/uploads/2010/10/1688x668_Neelan_R0-.jpg);
 	background-position: 46.5% -104px;
+	height: auto;
+}
+#home.patients #cover {
+	background-image: url(/wp-content/uploads/2010/10/1688x668_Jas_R1.jpg);
 	height: auto;
 }
 #university #cover {
@@ -370,6 +379,9 @@ h1, a, .comments span,
 #banner .intro {
 	width: 81%;
 }
+.patients #banner .intro {
+	width: 73%;	
+}
 #home #banner .intro {
 	font-size: 0.875em;
 	margin-bottom: 0.875em;
@@ -381,8 +393,19 @@ h1, a, .comments span,
 	height: 136px;
 	overflow: hidden;
 }
+.box-screen-shot {
+	height: 187px;	
+}
 .box-video-feature {
 	height: auto;
+}
+#technology .box-video-feature a,
+#technology .box-video-feature .box-content p {
+	
+}
+.box-video-feature .box-content p {
+	font-size: 1em;
+	bottom: -10px;	
 }
 .date,
 .post-age {
@@ -480,7 +503,6 @@ h1, a, .comments span,
 }
 #widget-buzz h3 a {
 	text-decoration: underline;
-	text-transform: uppercase;
 	padding-bottom: 10px;
 	display: inline-block;
 }
@@ -604,7 +626,6 @@ dt {
 	font-weight: bold;
 }
 #home #content h2 {
-	text-transform: uppercase;
 	text-align: center;
 	border-bottom: 1px solid #6d6d6d;
 	padding-bottom: 10px;
@@ -697,13 +718,8 @@ dt {
 #footer .grid_4 {
 	margin-right: 27px;
 }
-#footer span {
-	display: block;
-	text-indent: -9999px;
-	width: 174px;
-	height: 32px;
-	padding-bottom: 10px;
-	background: transparent url(/wp-content/themes/twentyten/media/images/hello-health-logo-2.png) no-repeat 0 0;
+#logo-footer{
+	padding-bottom: 18px;
 }
 .video {
 	padding: 17px 10px 17px 17px;
@@ -807,8 +823,8 @@ dt {
 }
 #started .base {
 	border-top: 1px solid #000;
-	margin-top: 30px;
-	padding-top: 85px;
+	margin-top: 21px;
+	padding-top: 45px;
 }
 .bubble {
 	position: absolute;
@@ -822,19 +838,20 @@ dt {
 	color: #e88600;
 }
 #figure-1 {
-	left: 39px;
-	top: 65px;
+	left:18px;
+	top:44px;
 }
 #figure-2 {
 	left:75px;
-	top:504px;
+	top:464px;
 }
 #figure-3 {
+	top: 21px;
 	left:700px;
 }
 #figure-4 {
 	left:625px;
-	top:580px;
+	top:540px;
 	width:300px;
 }
 
@@ -862,7 +879,7 @@ dt {
 }
 #home #content .shadow {
 	position: absolute;
-	top: 42px;
+	top: 39px;
 	width: 960px;
 	z-index: 999;
 }
@@ -886,10 +903,16 @@ dt {
 }
 .team {
 	padding-top: 1.5em;
+}
+.team,
+.team img {
 	width: 297px !important;
 }
+.team img {
+	height: 165px;	
+}
 .team p {
-	margin-top: 0;
+	margin-top: -4px;
 }
 .team .description {
 	margin-bottom: 0.5em;
@@ -897,8 +920,10 @@ dt {
 .role {
 	color: #fff;
 	padding: 12px 20px;
+	font-size: 0.875em;
 }
 .role span {
+	font-size: 1.125em;
 	display: block;
 }
 .google {
@@ -966,4 +991,29 @@ label span {
 	position: absolute;
 	right: 0;
 	top: 5px;	
+}
+.heading-description h3 {
+	margin: 1em 0 0;	
+}
+.heading-description p {
+	margin-top: 0;	
+}
+#sidebar .xoxo {
+	margin: 0;	
+}
+#sidebar .widget-container {
+	background:none repeat scroll 0 0 #E0E0E0;
+	list-style-type:none;
+	margin-bottom:1em;
+	padding:15px;
+}
+#sidebar .widget-container h3 {
+	border-bottom:1px solid #000000;
+	padding-bottom:3px;
+}
+.meta-nav {
+	display: none;	
+}
+.member-name p {
+	margin: 0 0 0.5em;	
 }

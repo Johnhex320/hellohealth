@@ -8,9 +8,8 @@
  * @subpackage Twenty_Ten
  * @since Twenty Ten 1.0
  */
- 
- 	define("SUPPORT_POST_ID",374);
- 
+	session_start();
+	include "functions-support.php";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html <?php language_attributes(); ?>>
@@ -38,9 +37,11 @@
 
 	?></title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="shortcut icon" href="/wp-content/uploads/2010/10/favicon.ico" />
 <link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory'); ?>/media/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory'); ?>/media/css/grid.css" />
-<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
+<link rel="stylesheet" type="text/css" media="all" href=" <?php bloginfo('template_directory'); ?>/support.css" /> 
+<!-- <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" /> -->
 <!--[if lt IE 9]<link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory'); ?>/media/css/ie.css" /><![endif]-->
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
@@ -56,24 +57,15 @@
 
 <body <?php echo hh_body_ID(); ?> <?php body_class(); ?>>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/media/js/init.js"></script>
+<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/media/js/jquery.validate.js"></script>
+<script>document.body.className += " <?php echo hh_get_root_parent($post->ID,1); ?>";</script>
 
 <h1 class="seo">Hello Health</h1>
 <div id="header">
     <div id="header-wrapper" class="container_6">
         <div class="grid_6">
-			<?php hh_page_menu('header','navigation-primary','menu',1); ?>
             <img id="logo" src="<?php bloginfo('template_directory'); ?>/media/images/logo-hello-health.png" alt="Hello Health logo" />
-
-           	<?php if (hh_get_root_parent($post->ID) == SUPPORT_POST_ID) : ?>
-			<form id="search-form" name="search-form" role="search" action=" action="<?php bloginfo('url'); ?>">
-				<fieldset>
-                	<legend>Search Site form</legend>
-						<label class="screen-reader-text" for="search-primary">Search:</label>
-        				<input type="text" value="" name="s" id="search-primary" />
-        				<input type="submit" id="search-submit" value="Search" />
-                </fieldset>
-    		</form>
-			<?php endif; ?>
+			<?php hh_page_menu('header','navigation-primary','menu',1); ?>
         </div>
         <div class="clear"></div>
     </div>

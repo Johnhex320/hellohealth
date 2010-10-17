@@ -439,7 +439,7 @@ if ( ! function_exists( 'twentyten_posted_on' ) ) :
  * @since Twenty Ten 1.0
  */
 function twentyten_posted_on() {
-	printf( __( '<span class="%1$s">Posted on</span> %2$s <span class="meta-sep">by</span> %3$s', 'twentyten' ),
+	printf( __( '<span class="%1$s hide">Posted on</span> %2$s <span class="meta-sep hide">by %3$s</span>', 'twentyten' ),
 		'meta-prep meta-prep-author',
 		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><span class="entry-date">%3$s</span></a>',
 			get_permalink(),
@@ -510,9 +510,35 @@ function hh_body_ID() {
 }
 function hh_page_menu($pagePosition, $htmlId, $cssClass, $includeHome) {
 	global $post;
+	define("HOME_PHYSICIANS_POST_ID", 6);
+	define("HOME_PATIENTS_POST_ID", 361);
 
 	$parentId = hh_get_root_parent($post->ID);
+	$isGlobalPage = false;
+
+	if ($parentId == HOME_PHYSICIANS_POST_ID || $parentId == HOME_PATIENTS_POST_ID) :
+		$_SESSION["parentId"] = $parentId;		
+	else:
+		// a global page
+		$isGlobalPage = true;
+		if (!isset($_SESSION["parentId"])):
+			$parentId = HOME_PHYSICIANS_POST_ID;
+			$_SESSION["parentId"] = HOME_PHYSICIANS_POST_ID;	
+		endif;
+	endif;
+
+	if ($pagePosition == "header" && $isGlobalPage):
+		if (isset($_SESSION["parentId"])) :
+			$parentId = $_SESSION["parentId"];
+		else:	
+			$parentId = HOME_PHYSICIANS_POST_ID;
+		endif;
+	elseif ($pagePosition == "footer"):
+		$parentId = 0;
+	endif;
+	
 	$pages = hh_get_page_children($parentId, "menu_order");
+
 	$countPages = count($pages);
 
 	$counter = 0;
@@ -546,7 +572,14 @@ function hh_page_menu($pagePosition, $htmlId, $cssClass, $includeHome) {
 		
 		if ($pgPosition == $pagePosition) :
 			$title = $page->post_title;
-			$option = '<li class="'.$class.'"><a href="'.get_page_link($page->ID).'" rel="section" title="'.$title.'">';
+
+			//by Etienne
+			//Catch Find Doctor to change the link to the application
+			if ( strtoupper($title) == strtoupper("Find a Practitioner") ) :
+				$option = '<li class="'.$class.'"><a href="https://'. PLATFORM_URL .'/PublicPortalServlet/DoctorsList.jsp" rel="section" title="'.$title.'">';
+			else:
+				$option = '<li class="'.$class.'"><a href="'.get_page_link($page->ID).'" rel="section" title="'.$title.'">';
+			endif;
 		
 			$title = hh_strip_home_title($title);
 			
@@ -556,17 +589,24 @@ function hh_page_menu($pagePosition, $htmlId, $cssClass, $includeHome) {
 			$counter++;
 		endif;
 	}
+	if ($parentId == HOME_PATIENTS_POST_ID) :
+		echo '<li><a id="dynamic-support-link" href="/" rel="section">Support</li>';
+	endif;
+	
 	echo '</ul>';
 	?>
 	<script>
 		$("#<?php echo $htmlId ?> li:last").addClass("last");
+		$(function() {
+			$("#dynamic-support-link").attr("href", $("#support-link").attr("href"));
+		});
 	</script>
 	<?php
 }
 
 function hh_strip_home_title($title) {
 	if (strrpos($title, "Home")==0) :
-		return str_replace(" Support","",str_replace(" Physicians","", str_replace(" Patients","", $title)));
+		return str_replace(" Support","",str_replace(" Physicians","", str_replace(" Patients","", str_replace(" Providers","", $title))));
 	else:
 		return $title;
 	endif;
@@ -609,9 +649,22 @@ function hh_generate_archive($parentPostId, $currentPostId) {
 	}
 }
 
-function hh_get_root_parent($pageId) {
+function hh_get_root_parent($pageId, $post_name = 0) {
 	global $wpdb;
-	$parent = $wpdb->get_var("SELECT post_parent FROM $wpdb->posts WHERE post_type='page' AND ID = '$pageId'");
-	if ($parent == 0) return $pageId;
-	else return hh_get_root_parent($parent);
+	$parentId = $wpdb->get_var("SELECT post_parent FROM $wpdb->posts WHERE post_type='page' AND ID = '$pageId'");
+	
+	if ($parentId == 0) :
+		if ($post_name == 0) :
+			return $pageId;
+		else:
+			$page = get_page($parentId);
+			return $page->post_name; 
+		endif;
+	else:
+		return hh_get_root_parent($parentId, $post_name);
+	endif;
+}
+
+function hh_get_posts_by_category($categoryId, $numberOfResults = -1) {
+	return get_posts('numberposts='.$numberOfResults.'&category='.$categoryId);
 }
