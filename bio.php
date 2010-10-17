@@ -13,8 +13,7 @@ Template Name: Biography
 			echo $intro;
 		?>
 	
-    <div class="release">
-		<h2>Team Members</h2>        
+    <div class="inner">
 		<div class="grid_2 alpha">
             <ul class="archive">	
 				<?php hh_generate_archive(288, $post->ID); // 288 = team members page id ?>
@@ -28,7 +27,7 @@ Template Name: Biography
 	</div>
     
     <script>
-		$("body").attr("id","about");
+		$("body").attr("id","biography");
 	</script>
 
  <!-- REALLY stop The Loop. -->

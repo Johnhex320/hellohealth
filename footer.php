@@ -26,7 +26,7 @@
             <?php hh_page_menu('footer', 'navigation-secondary', '', 0); ?>
         </div>
         <div class="grid_2 alpha">
-        	<span>Hello Health</span>
+        	<img id="logo-footer" src="/wp-content/themes/twentyten/media/images/hello-health-logo-2.png" alt="Hello Health" />
             <p>&copy; <?php echo date("Y"); ?> Hello Health.  All rights reserved</p>
         </div>
         <div class="clear"></div>
