@@ -4,11 +4,11 @@
         <div class="grid_6">
             <div id="login">
                 <img src="<?php bloginfo('template_directory'); ?>/media/images/square.png" alt="" />
-                <?php $rootPostName = hh_get_root_parent($post->ID,1); ?>
+                <?php $rootPostName = hh_get_root_parent($post->ID, 1); ?>
                 <ul>
                     <li class="first"><a href="/<?php echo $rootPostName; ?>/login/">Login</a></li>
                    <?php
-                   if ( strtoupper($rootPostName) == strtoupper("physicians") ) {
+                   if ( strtoupper($rootPostName) == strtoupper("physicians") ) { // slug
                    ?>
                     <li><a id="support-link" href="http://support.hellohealth.com/providers/" rel="external">Support</a></li>
                    <?php } else { ?>

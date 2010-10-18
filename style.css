@@ -53,7 +53,7 @@ legend {
 }
 
 #home h1 {
-	margin: 80px 0 0.5em;
+	margin: 109px 0 0.5em;
 }
 #university h1{
 	margin-top: 175px;
@@ -167,7 +167,7 @@ h1, a, .comments span,
 
 #logo {
 	position: absolute;
-	top: 65px;
+	top: 90px;
 	left: 0;
 	z-index: 9999;
 	display: none;
@@ -176,12 +176,12 @@ h1, a, .comments span,
 	display: block;
 }
 #navigation-primary {
-	margin-top: -5px;
+	margin-top: 7px;
 	font-family: Arial, Helvetica, sans-serif; /* Cufon text-decoration bug fixed */
 }
 .menu li {
 	float: left;
-	padding: 10px 12px 8px;
+	padding: 19px 12px 12px;
 	background: transparent url(/wp-content/themes/twentyten/media/images/nav-primary-separator.gif) no-repeat 0 13px;
 }
 .menu li.first {
@@ -376,15 +376,9 @@ h1,
 	position: relative;
 	height: 240px;
 }
-#banner .intro {
-	width: 81%;
-}
-.patients #banner .intro {
-	width: 73%;	
-}
 #home #banner .intro {
 	font-size: 0.875em;
-	margin-bottom: 0.875em;
+	margin-bottom: 2em;
 }	
 .box-video {
 	background-color: #6d6d6d;

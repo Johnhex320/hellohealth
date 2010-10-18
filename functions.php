@@ -513,18 +513,26 @@ function hh_page_menu($pagePosition, $htmlId, $cssClass, $includeHome) {
 	define("HOME_PHYSICIANS_POST_ID", 6);
 	define("HOME_PATIENTS_POST_ID", 361);
 
-	$parentId = hh_get_root_parent($post->ID);
-	$isGlobalPage = false;
+	$queryString = $_SERVER['QUERY_STRING'];
 
-	if ($parentId == HOME_PHYSICIANS_POST_ID || $parentId == HOME_PATIENTS_POST_ID) :
-		$_SESSION["parentId"] = $parentId;		
-	else:
-		// a global page
-		$isGlobalPage = true;
-		if (!isset($_SESSION["parentId"])):
-			$parentId = HOME_PHYSICIANS_POST_ID;
-			$_SESSION["parentId"] = HOME_PHYSICIANS_POST_ID;	
+	if (strlen($queryString) == 0):
+		$parentId = hh_get_root_parent($post->ID);
+
+		$isGlobalPage = false;
+	
+		if ($parentId == HOME_PHYSICIANS_POST_ID || $parentId == HOME_PATIENTS_POST_ID) :
+			$_SESSION["parentId"] = $parentId;	
+		else:
+			// a global page
+			$isGlobalPage = true;
+			if (!isset($_SESSION["parentId"])):
+				$parentId = HOME_PHYSICIANS_POST_ID;
+				$_SESSION["parentId"] = HOME_PHYSICIANS_POST_ID;	
+			endif;
 		endif;
+	else:
+		$parentId = $queryString;
+		$_SESSION["parentId"] = $parentId;
 	endif;
 
 	if ($pagePosition == "header" && $isGlobalPage):
@@ -533,10 +541,12 @@ function hh_page_menu($pagePosition, $htmlId, $cssClass, $includeHome) {
 		else:	
 			$parentId = HOME_PHYSICIANS_POST_ID;
 		endif;
+		$_SESSION["parentId"] = $parentId;
+		
 	elseif ($pagePosition == "footer"):
 		$parentId = 0;
 	endif;
-	
+
 	$pages = hh_get_page_children($parentId, "menu_order");
 
 	$countPages = count($pages);
@@ -606,7 +616,7 @@ function hh_page_menu($pagePosition, $htmlId, $cssClass, $includeHome) {
 
 function hh_strip_home_title($title) {
 	if (strrpos($title, "Home")==0) :
-		return str_replace(" Support","",str_replace(" Physicians","", str_replace(" Patients","", str_replace(" Providers","", $title))));
+		return  str_replace("Home Practitioner", "Home", str_replace(" Support","",str_replace(" Physicians","", str_replace(" Patients","", str_replace(" Providers","", $title)))));
 	else:
 		return $title;
 	endif;
@@ -652,12 +662,12 @@ function hh_generate_archive($parentPostId, $currentPostId) {
 function hh_get_root_parent($pageId, $post_name = 0) {
 	global $wpdb;
 	$parentId = $wpdb->get_var("SELECT post_parent FROM $wpdb->posts WHERE post_type='page' AND ID = '$pageId'");
-	
+
 	if ($parentId == 0) :
 		if ($post_name == 0) :
 			return $pageId;
 		else:
-			$page = get_page($parentId);
+			$page = get_page($pageId);
 			return $page->post_name; 
 		endif;
 	else:

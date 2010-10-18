@@ -28,15 +28,15 @@
                         <div class="shadow"></div>
                         <div class="content">
                             <div class="col first">
-                                <h3><a href="#" title="">HelloHealth Blog</a></h3>
-                                <span class="date">September 5, 2010</span>
-                                <h4>Meaningful Use</h4>
-                                <span class="author">Dr. Gordon Moore MD</span> <span class="post-age">| 3 hours ago</span>
+                                <h3>HelloHealth Blog</h3>
+                                <span class="date hide">September 5, 2010</span>
+                                <h4 class="hide">Meaningful Use</h4>
+                                <span class="author hide">Dr. Gordon Moore MD</span> <span class="post-age hide">| 3 hours ago</span>
                                 <p class="intro">
-                                	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                    <a href="#" class="more">Read more</a>.
+                                	To be announced
+                                    <a href="#" class="more hide">Read more</a>.
                                 </p>
-                                <p class="comments">Comments <span>7</span></p>
+                                <p class="comments hide">Comments <span>7</span></p>
                             </div>
                             <div id="buzz-content-secondary" class="col">
                             	<h3><a href="<?php echo get_permalink($thePost->ID); ?>" title="">What's New?</a></h3>
@@ -46,11 +46,10 @@
                                     <div class="clear"></div>
                                     <a href="<?php echo get_permalink($thePost->ID); ?>" title="Read more for '<?php echo $thePost->post_title ?>'" class="more">Read more</a>
                                 </div>
-                            	<h3 class="pushUp"><a href="#" title="">Events</a></h3>
-                                <span class="date">September 5, 2010</span>
+                            	<h3 class="pushUp">Events</h3>
+                                <span class="date hide">September 5, 2010</span>
                                 <p class="intro">
-                                	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                    <a href="#" class="more">Sign up</a>.
+                                	To be announced.
                                 </p>
                             </div>                            
                         	<div class="clear"></div>
